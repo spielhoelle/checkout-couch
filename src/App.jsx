@@ -5,11 +5,9 @@ import Header from './Header.jsx';
 import Admin from './Admin.jsx';
 import PouchDB from 'pouchdb';
 
-var localDB = new PouchDB('orders')
-var remoteDB = new PouchDB('http://localhost:5984/orders');
-localDB.info().then(function (info) {
-  console.log(info);
-})
+const localDB = new PouchDB('orders')
+const remoteDB = new PouchDB(process.env.REACT_APP_COUCHURL);
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -67,7 +65,7 @@ class App extends React.Component {
       console.log("successfully saved to db");
       localDB.sync(remoteDB);
       try {
-        var result = await localDB.allDocs({
+        const result = await localDB.allDocs({
           include_docs: true,
           attachments: true
         });
@@ -82,7 +80,7 @@ class App extends React.Component {
   }
 
   updateProducts = (item, index) => {
-    var data = this.state.products
+    const data = this.state.products
     if ( index === "like" ) {
       data[item.props.data.id].liked = !data[item.props.data.id].liked 
     }
