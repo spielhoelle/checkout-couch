@@ -7,6 +7,7 @@ class CheckoutForm extends React.Component {
 
   render() {
     return (
+      <div className="container py-5">
         <div className="row">
           <div className="col-md-4 order-md-2 mb-4">
             <h4 className="d-flex justify-content-between align-items-center mb-3">
@@ -38,6 +39,7 @@ class CheckoutForm extends React.Component {
           <Form data={this.props.data} saveData={this.props.saveData} handleFormData={this.props.handleFormData} />
 
         </div>
+      </div>
     );
   }
 }

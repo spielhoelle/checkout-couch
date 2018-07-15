@@ -1,6 +1,8 @@
 import React from 'react';
+import { BrowserRouter, Route } from 'react-router-dom'
 import CheckoutForm from './CheckoutForm.jsx';
 import Header from './Header.jsx';
+import Admin from './Admin.jsx';
 import PouchDB from 'pouchdb';
 
 var localDB = new PouchDB('orders')
@@ -103,11 +105,16 @@ class App extends React.Component {
   }
 
   render() {
+  console.log('#####', "render");
     return (
-      <div>
-        <Header headerdata={this.state.headerdata}/>
-        <CheckoutForm updateProducts={this.updateProducts} data={this.state.form} total={this.state.total} products={this.state.products} handleFormData={this.handleFormData} saveData={this.saveData}/>
-      </div>
+      <BrowserRouter>
+        <div className="w-100">
+          <Header headerdata={this.state.headerdata}/>
+          <Route exact path="/" render={() => <CheckoutForm updateProducts={this.updateProducts} data={this.state.form} total={this.state.total} products={this.state.products} handleFormData={this.handleFormData} saveData={this.saveData}/>}/>
+          <Route path="/admin" component={Admin}/>
+        </div>
+        
+      </BrowserRouter>
     );
   }
 }
