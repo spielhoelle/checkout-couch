@@ -63,7 +63,13 @@ class App extends React.Component {
     try {
       await localDB.post(order);
       console.log("successfully saved to db");
-      localDB.sync(remoteDB);
+      localDB.sync(remoteDB)
+      .on('change', function (info) {
+        console.log('Sync change: ', info);
+      })
+      .on('error', function (err) {
+        console.log('Sync error: ', err);
+      });
       try {
         const result = await localDB.allDocs({
           include_docs: true,
