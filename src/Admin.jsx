@@ -1,10 +1,50 @@
 import React from 'react';
+import PouchDB from 'pouchdb';
+import Order from './Order.jsx';
+const localDB = new PouchDB('orders')
+const remoteDB = new PouchDB(process.env.REACT_APP_COUCHURL);
+
+
 class Admin extends React.Component {
+  state = {
+    orders: []
+  }
+  componentWillMount = async() => {
+    localDB.sync(remoteDB)
+    try {
+      let orders = await localDB.query('byEmail', {
+        include_docs: true,
+        attachments: true
+      })
+      console.log('All docs:', orders);
+      orders = orders.rows
+      this.setState({orders})
+    } catch (err) {
+      console.log(err);
+    }
+  }
   render() {
+    const orderNodes = this.state.orders.map((order) => {
+      return (<Order order={order} key={order._id} />)
+    });
+
     return (
-      <h1 className="text-center">
-        Admin
-      </h1>
+      <div className="container">
+        <h1 className="text-center"> Recent Orders </h1>
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              {orderNodes}
+            </tbody>
+          </table>
+      </div>
     );
   }
 }
