@@ -13,10 +13,7 @@ class Order extends React.Component {
             <td>{this.props.order.doc.form.userName}</td>
             <td>{this.props.order.doc.form.userName}</td>
             <td>{this.props.order.doc.form.userName}</td>
-            <td>
-              <Link to={`/orders/${this.props.order.doc._id}`}>View</Link>
-            </td>
-
+            <td> <Link to={`/orders/${this.props.order.doc._id}`}>View</Link> </td>
           </tr>
       );
   }

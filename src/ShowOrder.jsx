@@ -3,15 +3,6 @@ import PouchDB from 'pouchdb';
 const localDB = new PouchDB('orders')
 const remoteDB = new PouchDB(process.env.REACT_APP_COUCHURL);
 
-class Item extends React.Component {
-	render() {
-  	return <li>
-      	{ this.props.name }
-        { this.props.children }
-    </li>
-  }
-}
-
 class ShowOrder extends React.Component {
   state = {
     order: []

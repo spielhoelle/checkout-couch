@@ -24,14 +24,10 @@ class Admin extends React.Component {
     }
   }
   render() {
-    const orderNodes = this.state.orders.map((order) => {
-      return (<Order order={order} key={order._id} />)
-    });
-
     return (
       <div className="container">
         <h1 className="text-center"> Recent Orders </h1>
-          <table class="table table-sm">
+          <table className="table table-sm">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -41,7 +37,10 @@ class Admin extends React.Component {
               </tr>
             </thead>
             <tbody>
-              {orderNodes}
+              {this.state.orders.map((order) => 
+                <Order key={order.key} order={order}  />
+              )
+              }
             </tbody>
           </table>
       </div>
