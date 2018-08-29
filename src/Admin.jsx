@@ -38,7 +38,7 @@ class Admin extends React.Component {
             </thead>
             <tbody>
               {this.state.orders.map((order) => 
-                <Order key={order.key} order={order}  />
+                <Order key={order.id} order={order}  />
               )
               }
             </tbody>
