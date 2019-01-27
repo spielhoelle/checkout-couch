@@ -6,7 +6,7 @@ class Header extends React.Component {
   render() {
     return (
       <div className="">
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
           <NavLink className="navbar-brand" activeClassName="active" exact to='/'>
             <h2 className="d-flex align-items-center"><img className="mr-3" src={ logo } alt="" width="40" />{this.props.headerdata.title }</h2>
           </NavLink>

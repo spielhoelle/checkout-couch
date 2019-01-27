@@ -8,6 +8,7 @@ import PouchDB from 'pouchdb';
 
 const localDB = new PouchDB('orders')
 const remoteDB = new PouchDB(process.env.REACT_APP_COUCHURL);
+console.log('process.env.REACT_APP_COUCHURL', process.env.REACT_APP_COUCHURL);
 
 class App extends React.Component {
   constructor(props) {

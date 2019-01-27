@@ -1,0 +1,32 @@
+version: "2"
+services:
+  
+  frontend:
+    container_name: frontend
+    restart: always
+    ports:
+      - "3000:3000"
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    links:
+      - couchdb
+      
+  backend:
+    container_name: backend
+    restart: always
+    environment:
+      - REACT_APP_COUCHURL=http://couchdb:5984
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    links:
+      - couchdb
+      
+  couchdb:
+    container_name: couchdb
+    image: couchdb
+    ports:
+      - "35984:5984"
