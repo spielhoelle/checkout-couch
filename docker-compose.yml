@@ -9,8 +9,13 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    links:
+    environment:
+      - REACT_APP_COUCHURL=http://localhost:35984/orders 
+    depends_on:
       - couchdb
+    volumes:
+      - './frontend:/home/node/app'
+      - '/home/node/app/node_modules'
       
   backend:
     container_name: backend
@@ -24,6 +29,11 @@ services:
       - "8080:8080"
     links:
       - couchdb
+    depends_on:
+      - couchdb
+    volumes:
+      - './backend:/home/node/app'
+      - '/home/node/app/node_modules'      
       
   couchdb:
     container_name: couchdb

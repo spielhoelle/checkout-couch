@@ -4,7 +4,6 @@ import Order from './Order.jsx';
 const localDB = new PouchDB('orders')
 const remoteDB = new PouchDB(process.env.REACT_APP_COUCHURL);
 
-
 class Admin extends React.Component {
   state = {
     orders: []
@@ -12,7 +11,7 @@ class Admin extends React.Component {
   componentWillMount = async() => {
     localDB.sync(remoteDB)
     try {
-      let orders = await localDB.query('byEmail', {
+      let orders = await localDB.query('checkout/byEmail', {
         include_docs: true,
         attachments: true
       })
