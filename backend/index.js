@@ -21,7 +21,7 @@ server.use(restify.plugins.queryParser());
 server.use(restify.plugins.urlEncodedBodyParser());
 
 function get(req, res, next) {
-  console.log("");
+  console.log("GET FUNCTION");
 }
 
 server.get("/db", get);

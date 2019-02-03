@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom';
 
 class Order extends React.Component {
   render() {
-      console.log(this.props)
     return (
           <tr>
             <th scope="row">{this.props.order.key}</th>

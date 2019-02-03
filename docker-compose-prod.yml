@@ -8,15 +8,17 @@ services:
       - "3000:3000"
     build:
       context: ./frontend
-      dockerfile: Dockerfile
+      dockerfile: prod.Dockerfile
     environment:
-      - REACT_APP_COUCHURL=http://localhost:35984/orders 
+      - REACT_APP_COUCHURL=http://localhost:35984/orders
     depends_on:
+      # - nginx
       - couchdb
     volumes:
-      - './frontend:/home/node/app'
       - '/home/node/app/node_modules'
-      
+    ports:
+      - '80:80'      
+
   backend:
     container_name: checkout-couch-backend
     restart: always
@@ -39,4 +41,4 @@ services:
     container_name: couchdb
     image: couchdb
     ports:
-      - "35984:5984"
+      - "35984:5984"  

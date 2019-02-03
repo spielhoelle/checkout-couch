@@ -1,10 +1,10 @@
-FROM node:latest
-RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
+FROM node:10.5.0
+RUN mkdir /home/node/app
 WORKDIR /home/node/app
-COPY package*.json ./
-RUN npm install
-COPY . /home/node/app
-COPY --chown=node:node . .
-USER node
-EXPOSE 8080
-CMD [ "npm", "start" ]
+ENV PATH /home/node/app/node_modules/.bin:$PATH
+ARG REACT_APP_COUCHURL
+ENV REACT_APP_COUCHURL $REACT_APP_COUCHURL
+COPY package.json .
+RUN npm install --silent
+RUN npm install react-scripts@1.1.1 -g --silent
+CMD ["npm", "start"]

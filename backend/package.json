@@ -10,7 +10,11 @@
     "restify": "^7.6.0",
     "restify-cors-middleware": "^1.1.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "faker": "^1.0.0",
+    "pouchdb-http": "^6.0.2",
+    "uuid": "^3.3.2"
+  },
   "scripts": {
     "start": "node index.js"
   }
